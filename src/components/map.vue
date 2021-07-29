@@ -44,11 +44,8 @@ export default {
      center: [ 49.1193089, 6.1757156 ],
      zoom: 12,
        markers: [
-          {id: 1, coordinates: [ 49.114910, 6.178810 ]},
-          {id: 2, coordinates: [ 49.133290, 6.154370 ]},
-          {id: 3, coordinates: [ 49.102160, 6.158850 ]},
-          {id: 4, coordinates: [ 49.136010, 6.199630 ]},
-          {id: 5, coordinates: [ 49.105563, 6.182234 ]},
+          {id: 1, coordinates: [ 50.635342, 3.058570 ]}, // Lille Ylly
+          {id: 2, coordinates: [ 48.813843, 2.392828 ]}, // Paris Ylly
         ]
    }
  },
