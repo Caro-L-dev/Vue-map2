@@ -3,15 +3,51 @@
     <div class="map--container">
       <h2>Mais où se trouve donc Wilson ?</h2>
       <p>Affiche les deux adresses de l'agence Ylly : Lille et Paris ! </p>
-      <p>Consigne suivante : Savoir choisir entre Lille ou paris (formulaire) // Barre de recherche </p>
-      <iframe class="map--iframe" src="https://www.google.com/maps/d/u/0/embed?mid=10mgQUxVCBhSATcTkhWaV51bhLdmQ3CoD" width="1300" height="500px"></iframe>
+      <p>Créer une barre de recherche pour sélectionner la bonne agence. </p>
+       <l-map
+        :center="center"
+        :zoom="zoom"
+        class="map"
+        ref="map"
+        @update:zoom="zoomUpdated"
+        @update:center="centerUpdated"
+      >
+        <l-tile-layer
+          :url="url"
+   >
+        </l-tile-layer>
+      </l-map>
     </div>
 
   </body>
 </template>
 
 <script>
-  
+  import { LMap, LTileLayer } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
+
+export default {
+ components: {
+   LMap,
+   LTileLayer
+ },
+ data () {
+   return {
+     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+     center: [ 49.1193089, 6.1757156 ],
+     zoom: 12,
+   }
+ },
+ methods: {
+   zoomUpdated (zoom) {
+     this.zoom = zoom;
+     console.log(this.markers)
+   },
+   centerUpdated (center) {
+     this.center = center;
+   }
+ }
+}
 </script>
 
 <style>
@@ -22,11 +58,6 @@
   .map--container {
     text-align: center;
     color: whitesmoke;
-  }
-
-  .map--iframe {
-    border: 0.2rem whitesmoke solid;
-    border-radius: 0.5rem;
   }
 
  .map {

@@ -1,16 +1,17 @@
 <template>
  <div id="app">
-   <HereMap :center="center"/> 
+   <!--<HereMap :center="center"/> -->
+   <Map/>
   </div>
 </template>
 
 <script>
-import HereMap from './components/HereMap.vue';
+import Map from './components/map.vue';
 
 export default {
  name: 'App',
  components: {
-   HereMap,
+   Map,
  },
  data() {
    return {
