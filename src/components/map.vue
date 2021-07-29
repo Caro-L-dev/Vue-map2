@@ -6,11 +6,12 @@
       <p>Consigne suivante : Savoir choisir entre Lille ou paris (formulaire) // Barre de recherche </p>
       <iframe class="map--iframe" src="https://www.google.com/maps/d/u/0/embed?mid=10mgQUxVCBhSATcTkhWaV51bhLdmQ3CoD" width="1300" height="500px"></iframe>
     </div>
+
   </body>
 </template>
 
 <script>
-
+  
 </script>
 
 <style>
