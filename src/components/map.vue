@@ -2,8 +2,7 @@
   <body>
     <div class="map--container">
       <h2>VueJs Map</h2>
-      <p>Affiche les deux adresses de l'agence Ylly : Lille et Paris !</p>
-      <p>Créer une barre de recherche pour sélectionner la bonne agence.</p>
+      <p>Barre de recherche</p>
       <l-map
         :center="center"
         :zoom="zoom"
@@ -69,8 +68,8 @@ body {
 
 .map {
   position: absolute;
-  right: 0;
   width: 100%;
   height: 100%;
+  border: 0.2rem solid white;
 }
 </style>
