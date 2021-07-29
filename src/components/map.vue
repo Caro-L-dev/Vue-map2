@@ -1,10 +1,10 @@
 <template>
   <body>
     <div class="map--container">
-      <h2>Mais où se trouve donc Wilson ?</h2>
-      <p>Affiche les deux adresses de l'agence Ylly : Lille et Paris ! </p>
-      <p>Créer une barre de recherche pour sélectionner la bonne agence. </p>
-       <l-map
+      <h2>VueJs Map</h2>
+      <p>Affiche les deux adresses de l'agence Ylly : Lille et Paris !</p>
+      <p>Créer une barre de recherche pour sélectionner la bonne agence.</p>
+      <l-map
         :center="center"
         :zoom="zoom"
         class="map"
@@ -12,69 +12,65 @@
         @update:zoom="zoomUpdated"
         @update:center="centerUpdated"
       >
-        <l-tile-layer
-          :url="url"
-   >
-        </l-tile-layer>
-        <l-marker
-          v-form="marker in markers"
+        <l-tile-layer :url="url"> </l-tile-layer>
+        <agence
+          v-for="marker in markers"
           :key="marker.id"
-          :lat-lng="marker.coordinates"
-          >
-        </l-marker>
+          :marker="marker"
+        >
+        </agence>
       </l-map>
     </div>
-
   </body>
 </template>
 
 <script>
-  import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { LMap, LTileLayer } from "vue2-leaflet";
+import Agence from './agence.vue';
+import "leaflet/dist/leaflet.css";
 
 export default {
- components: {
-   LMap,
-   LTileLayer,
-   LMarker
- },
- data () {
-   return {
-     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-     center: [ 49.1193089, 6.1757156 ],
-     zoom: 12,
-       markers: [
-          {id: 1, coordinates: [ 50.635342, 3.058570 ]}, // Lille Ylly
-          {id: 2, coordinates: [ 48.813843, 2.392828 ]}, // Paris Ylly
-        ]
-   }
- },
- methods: {
-   zoomUpdated (zoom) {
-     this.zoom = zoom;
-     console.log(this.markers)
-   },
-   centerUpdated (center) {
-     this.center = center;
-   }
- }
-}
+  components: {
+    LMap,
+    LTileLayer,
+    Agence
+  },
+  data() {
+    return {
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      center: [50.635342, 3.05857],
+      zoom: 6,
+      markers: [
+        { id: 1, imageUrl:"https://img.icons8.com/doodle/48/000000/pinguin.png", coordinates: [50.635342, 3.05857] }, // Lille Ylly
+        { id: 2, imageUrl: "https://img.icons8.com/doodle/48/000000/home--v1.png" , coordinates: [48.813843, 2.392828] }, // Paris Ylly
+      ],
+    };
+  },
+  methods: {
+    zoomUpdated(zoom) {
+      this.zoom = zoom;
+      console.log(this.markers);
+    },
+    centerUpdated(center) {
+      this.center = center;
+    },
+  },
+};
 </script>
 
 <style>
+body {
+  background: #4d6a79;
+}
+.map--container {
+  text-align: center;
+  color: whitesmoke;
+}
 
-  body {
-    background: #4D6A79;
-  }
-  .map--container {
-    text-align: center;
-    color: whitesmoke;
-  }
-
- .map {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   overflow :hidden;
- }
+.map {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>
