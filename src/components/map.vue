@@ -3,16 +3,17 @@
     <div class="map--container">
       <h2>VueJs Map</h2>
 
-      <input
-        type="text"
-        v-model="search"
-        autocomplete="off"
-        class="searchbar"
-        placeholder="Search..."
-      />
-      <div v-for="adress in filteredAdresses" :key="adress.id">
-        <adress :adress="adress"></adress>
-      </div>
+      <select
+        name="agency"
+        id="agency-select"
+        v-model="selectAgency"
+      >
+        <option value="">-- Please choose an agency --</option>
+        <option v-for="adress in adresses" :key="adress.id" v-bind:value="adress.id">{{ adress.agency }}</option>
+      </select>
+      <p>
+      {{ selectAgency }}
+</p>
       <l-map
         :center="center"
         :zoom="zoom"
@@ -33,7 +34,6 @@
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Agence from "./AgenceIcons.vue";
 import "leaflet/dist/leaflet.css";
-import Adress from "./Adress.vue";
 
 import adressesData from "../adresses.json";
 
@@ -42,15 +42,15 @@ export default {
     LMap,
     LTileLayer,
     Agence,
-    Adress,
+
   },
   data() {
     let markers = Array();
-    adressesData.adresses.forEach(adress => {
+    adressesData.adresses.forEach((adress) => {
       markers.push({
         id: adress.id,
         coordinates: [adress.latitude, adress.longitude],
-        imageUrl: adress.imageUrl
+        imageUrl: adress.imageUrl,
       });
     });
 
@@ -60,7 +60,8 @@ export default {
       zoom: 6,
       search: "",
       adresses: adressesData.adresses,
-      markers: markers
+      markers: markers,
+      selectAgency: ''
     };
   },
   methods: {
@@ -89,13 +90,6 @@ body {
 .map--container {
   text-align: center;
   color: whitesmoke;
-}
-
-.searchbar {
-  background: rgb(161, 161, 161);
-  height: 1.5rem;
-  outline: none;
-  border-style: none;
 }
 
 .map {
