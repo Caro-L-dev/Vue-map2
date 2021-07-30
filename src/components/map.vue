@@ -46,11 +46,15 @@ export default {
       adresses: [
         {
           id: 1,
-          title: "Lille",
+          town: "Lille",
+          latitude: 50.635342,
+          longitude: 3.05857
         },
         {
           id: 2,
-          title: "Paris",
+          town: "Paris",
+          latitude: 48.813843,
+          longitude: 2.392828
         },
       ],
 
@@ -79,7 +83,7 @@ export default {
   },
    computed: {
    filteredAdresses() {
-     return this.adresses.filter(adress => adress.title.toLowerCase().includes(this.search.toLowerCase()))
+     return this.adresses.filter(adress => adress.town.toLowerCase().includes(this.search.toLowerCase()))
    }
  }
 };
