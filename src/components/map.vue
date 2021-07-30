@@ -33,8 +33,9 @@
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Agence from "./AgenceIcons.vue";
 import "leaflet/dist/leaflet.css";
-
 import Adress from "./Adress.vue";
+
+import adressesData from "../adresses.json";
 
 export default {
   components: {
@@ -44,42 +45,22 @@ export default {
     Adress,
   },
   data() {
+    let markers = Array();
+    adressesData.adresses.forEach(adress => {
+      markers.push({
+        id: adress.id,
+        coordinates: [adress.latitude, adress.longitude],
+        imageUrl: adress.imageUrl
+      });
+    });
+
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [50.635342, 3.05857],
       zoom: 6,
       search: "",
-      adresses: [
-        {
-          id: 1,
-          town: "Lille",
-          agency: "Ylly Lille",
-          latitude: 50.635342,
-          longitude: 3.05857,
-          infos: "85 Rue Nationale, 59800 Lille",
-        },
-        {
-          id: 2,
-          town: "Paris",
-          agency: "Ylly Paris",
-          latitude: 48.813843,
-          longitude: 2.392828,
-          infos: "11 Rue Maurice Grandcoing, 94200 Ivry-sur-Seine",
-        },
-      ],
-
-      markers: [
-        {
-          id: 1,
-          imageUrl: "https://img.icons8.com/doodle/48/000000/pinguin.png",
-          coordinates: [50.635342, 3.05857],
-        }, // Lille Ylly
-        {
-          id: 2,
-          imageUrl: "https://img.icons8.com/doodle/48/000000/home--v1.png",
-          coordinates: [48.813843, 2.392828],
-        }, // Paris Ylly
-      ],
+      adresses: adressesData.adresses,
+      markers: markers
     };
   },
   methods: {

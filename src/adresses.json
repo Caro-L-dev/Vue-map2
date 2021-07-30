@@ -1,0 +1,22 @@
+{
+  "adresses": [
+    {
+      "id": 1,
+      "town": "Lille",
+      "agency": "Ylly Lille",
+      "latitude": 50.635342,
+      "longitude": 3.15857,
+      "imageUrl": "https://img.icons8.com/doodle/48/000000/pinguin.png",
+      "infos": "85 Rue Nationale, 59800 Lille"
+    },
+    {
+      "id": 2,
+      "town": "Paris",
+      "agency": "Ylly Paris",
+      "latitude": 48.813843,
+      "longitude": 2.392828,
+      "imageUrl": "https://img.icons8.com/doodle/48/000000/home--v1.png",
+      "infos": "11 Rue Maurice Grandcoing, 94200 Ivry-sur-Seine"
+    }
+  ]
+}   
