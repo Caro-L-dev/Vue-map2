@@ -3,7 +3,13 @@
     <div class="map--container">
       <h2>VueJs Map</h2>
 
-      <input type="text" v-model="search" placeholder="Search..." />
+      <input
+        type="text"
+        v-model="search"
+        autocomplete="off"
+        class="searchbar"
+        placeholder="Search..."
+      />
       <div v-for="adress in filteredAdresses" :key="adress.id">
         <adress :adress="adress"></adress>
       </div>
@@ -25,7 +31,7 @@
 
 <script>
 import { LMap, LTileLayer } from "vue2-leaflet";
-import Agence from "./agence.vue";
+import Agence from "./AgenceIcons.vue";
 import "leaflet/dist/leaflet.css";
 
 import Adress from "./Adress.vue";
@@ -47,14 +53,18 @@ export default {
         {
           id: 1,
           town: "Lille",
+          agency: "Ylly Lille",
           latitude: 50.635342,
-          longitude: 3.05857
+          longitude: 3.05857,
+          infos: "85 Rue Nationale, 59800 Lille",
         },
         {
           id: 2,
           town: "Paris",
+          agency: "Ylly Paris",
           latitude: 48.813843,
-          longitude: 2.392828
+          longitude: 2.392828,
+          infos: "11 Rue Maurice Grandcoing, 94200 Ivry-sur-Seine",
         },
       ],
 
@@ -81,11 +91,13 @@ export default {
       this.center = center;
     },
   },
-   computed: {
-   filteredAdresses() {
-     return this.adresses.filter(adress => adress.town.toLowerCase().includes(this.search.toLowerCase()))
-   }
- }
+  computed: {
+    filteredAdresses() {
+      return this.adresses.filter((adress) =>
+        adress.agency.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
+  },
 };
 </script>
 
@@ -96,6 +108,13 @@ body {
 .map--container {
   text-align: center;
   color: whitesmoke;
+}
+
+.searchbar {
+  background: rgb(161, 161, 161);
+  height: 1.5rem;
+  outline: none;
+  border-style: none;
 }
 
 .map {
