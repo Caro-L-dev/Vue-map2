@@ -3,17 +3,22 @@
     <div class="map--container">
       <h2>VueJs Map</h2>
 
-      <select
-        name="agency"
-        id="agency-select"
-        v-model="selectAgency"
-      >
+      <select name="agency" id="agency-select" v-model="selectAgency"
+        @change="switchSelect($event)">
         <option value="">-- Please choose an agency --</option>
-        <option v-for="adress in adresses" :key="adress.id" v-bind:value="adress.id">{{ adress.agency }}</option>
+        <option
+          v-for="adress in adresses"
+          :key="adress.id"
+          v-bind:value="adress.id"
+        >
+          {{ adress.agency }}
+        </option>
       </select>
+
       <p>
-      {{ selectAgency }}
-</p>
+        {{ selectAgency }}
+      </p>
+
       <l-map
         :center="center"
         :zoom="zoom"
@@ -42,7 +47,6 @@ export default {
     LMap,
     LTileLayer,
     Agence,
-
   },
   data() {
     let markers = Array();
@@ -61,7 +65,8 @@ export default {
       search: "",
       adresses: adressesData.adresses,
       markers: markers,
-      selectAgency: ''
+      selectAgency: "",
+      selected: '' 
     };
   },
   methods: {
@@ -71,6 +76,9 @@ export default {
     },
     centerUpdated(center) {
       this.center = center;
+    },
+    switchSelect() {
+      this.center = this.markers.filter(arrayElement => arrayElement.id === this.selectAgency)[0].coordinates;
     },
   },
   computed: {
